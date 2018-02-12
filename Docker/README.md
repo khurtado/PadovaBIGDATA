@@ -1,4 +1,4 @@
-# Docker
+B# Docker
 
 1. [How to create the container](#How-to-create-the-container)
    * [Install Docker in your host](#install-docker-in-your-host)
@@ -41,3 +41,37 @@ docker ps
 #return list of ran container
 docker ps -a
 ```
+
+### Detour
+
+In order to demonstrate the flexibility of docker, consider this little demonstration for the purpose to be awed.
+
+
+```
+#Pull the busybox image from docker registry
+sudo docker pull busybox
+#Return the list of image in the system
+sudo docker images 
+#Run echo command inside the container
+sudo docker run busybox echo "hello from busybox"
+```
+
+In order to run more than just echo on the created container, you may explore the containerised OS by attaching to interactive tty.
+
+```
+docker run -it busybox sh
+```
+
+Exit by pressing exit.
+One good rule of thumb is to clear the container renmants.
+
+```
+#Identify used container ID
+sudo docker ps -a
+#Delete the ran container
+sudo docker rm <ID>
+```
+
+The detour ends here.
+
+### Creating a Spark image with Dockerfile
