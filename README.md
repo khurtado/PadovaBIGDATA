@@ -1,43 +1,16 @@
 # BIGDATA
 
-1. [How to create the container](#How-to-create-the-container)
-   * [Install Docker in your host](#install-docker-in-your-host)
-   * [Creating a Spark image with Dockerfile](#Creating-a-Spark-image-with-Dockerfile)
-   * [Important conf file and script](#Important-conf-file-and-script)
-   * [Build the Docker](#Build-the-Docker)
-2. [Use the Spark with Mesos](#Use-the-Spark-with-Mesos)
-3. [Documentation](#documentation)
+1. [Overview](#Overview)
+   * [Jupyter Notebook](#Jupyter-Notebook)
+   * [Docker](#Docker)
+   * [nanoAod Analyzer in spark](#nano-Analyzer-in-spark)
 
-## How to create the container
+## Overview
 
-### install docker in your host
+Documentation on various projects
 
-Add the docket repo in your host (superuser):
+## Jupyter Notebook
 
-```
-sudo tee /etc/yum.repos.d/docker.repo <<EOF                                                              
-[dockerrepo]                                                                                             
-name=Docker Repository                                                                                    
-baseurl=https://yum.dockerproject.org/repo/main/centos/7/       
-enabled=1                                                                                                
-gpgcheck=1                                                                                               
-gpgkey=https://yum.dockerproject.org/gpg                                                                 
-EOF
-sudo yum update
-```
+## Docker
 
-Install docker and start docker daemon:
-
-```
-sudo yum install docker-engine
-sudo service docker start
-```
-
-If successful, you could be able to inspect the containers that are currently running, which will be none for the moment.
-
-```
-#return list of running container
-docker ps
-#return list of ran container
-docker ps -a
-```
+## nano Analyzer in spark
