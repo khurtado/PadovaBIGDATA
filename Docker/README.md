@@ -6,7 +6,7 @@ B# Docker
    * [Important conf file and script](#Important-conf-file-and-script)
    * [Build the Docker](#Build-the-Docker)
 2. [Use the Spark with Mesos](#Use-the-Spark-with-Mesos)
-3. [Documentation](#documentation)
+3. [Reference](#reference)
 
 ## How to create the container
 
@@ -114,3 +114,37 @@ We have Docker's entry point script. The script, showcased below, will populate 
 Now, let’s define the Dockerfile entry point such that it lets us define some basic options that will get passed to the Spark command, for example, spark-shell, spark-submit or pyspark (script/RUN.sh)
 
 #### Build the Docker
+
+Little definition:
+
+```
+A Dockerfile is a simple text-file that contains a list of commands that the Docker client calls while creating an image. It's a simple way to automate the image creation process. The best part is that the commands you write in a Dockerfile are almost identical to their equivalent Linux commands. This means you don't really have to learn new syntax to create your own dockerfiles.
+```
+
+Sergio kindly prepared a child image in this folder.
+
+The ```docker build``` command does the heavy-lifting of creating a Docker image from a ```Dockerfile```. The ```docker build``` command takes ```-t``` optional tag name and a location of the directory containing the ```Dockerfile```.
+
+```
+sudo docker build -t mysparkmesoshadoop .
+sudo docker tag mysparkmesoshadoop:latest mysparkmesoshadoop:latest
+```
+
+The command should build the spark image, inspecting via ```sudo docker ps``` would reveal the built image.
+
+## Use the Spark with Mesos
+
+Executing below command would run the spark image:
+
+```
+sudo docker run -it -e SPARK_MASTER=mesos://10.64.22.79:5050 -e SPARK_IMAGE=mysparkmesoshadoop --name mySparkShell --net host --privileged --pid host mysparkmesoshadoop /opt/spark/bin/spark-shell --master mesos://10.64.22.79:5050
+```
+
+Where 10.64.22.79 is the host ip where master mesos is running. 5050 the default mesos port. straldi/sparkhdfsmesos is the containr we just crerate and upload to docker repository (straldi is my own repository you could create yours). mySparkShell is the name of the app in mesos. This following command /opt/spark/bin/spark-shell --master mesos://10.64.22.79:5050 is the real command executed.
+
+A spark-shell will be opened.
+
+## Reference
+
+* [Mesos - Spark](https://spark.apache.org/docs/latest/running-on-mesos.html)
+* [Docker](https://www.docker.com/)
