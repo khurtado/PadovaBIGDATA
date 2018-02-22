@@ -89,13 +89,15 @@ We suppose to have a mesos cluster composed by 1 master and more slaves or 3 mas
 
 Let’s explain some very important files that will be available in the Docker image according to the Dockerfile mentioned earlier:
 
-The spark-conf/spark-env.sh, as mentioned in the Spark docs, will be used to set the location of the Mesos libmesos.so:
+The ```spark-conf/spark-env.sh```, as mentioned in the Spark docs, will be used to set the location of the Mesos libmesos.so:
 
 ```
-export MESOSNATIVEJAVALIBRARY=${MESOSNATIVEJAVALIBRARY:-/usr/lib/libmesos.so}export SPARKLOCALIP=${SPARKLOCALIP:-"127.0.0.1"}export SPARKPUBLICDNS=${SPARKPUBLICDNS:-"127.0.0.1"}
+export MESOSNATIVEJAVALIBRARY=${MESOSNATIVEJAVALIBRARY:-/usr/lib/libmesos.so}
+export SPARKLOCALIP=${SPARKLOCALIP:-"127.0.0.1"}
+export SPARKPUBLICDNS=${SPARKPUBLICDNS:-"127.0.0.1"}
 ```
 
-The spark-conf/spark-defaults.conf serves as the definition of the default configuration for our Spark jobs within the container, the contents are as follows:
+The ```spark-conf/spark-defaults.conf``` serves as the definition of the default configuration for our Spark jobs within the container, the contents are as follows:
 
 ```
 spark.master  SPARKMASTER
