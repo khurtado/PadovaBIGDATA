@@ -1,4 +1,4 @@
-# BIGDATA
+# CMS big data analysis with Spark
 
 1. [Overview](#Overview)
    * [Jupyter Notebook](#Jupyter-Notebook)
@@ -13,4 +13,4 @@ Documentation on various projects
 
 ## Docker
 
-## nano Analyzer in spark
+## nanoAOD Analyzer in spark
