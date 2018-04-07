@@ -11,11 +11,11 @@
 
 ### Docker Image
 
-    The docker image is built based on CentOs with XrootD-Hadoop-Connector compiled on the fly. By default the docker image is capable to accessing EOS storage. Currently docker images [siewyanhoh/shohmesos:v3](https://hub.docker.com/r/siewyanhoh/shohmesos/) is working. DockerFile used is [here](https://github.com/SiewYan/BIGDATA-1/blob/docker_dev/Docker_dev/DockerFiles/Dockerfile_v3).
+   The docker image is built based on CentOs with XrootD-Hadoop-Connector compiled on the fly. By default the docker image is capable to accessing EOS storage. Currently docker images [siewyanhoh/shohmesos:v3](https://hub.docker.com/r/siewyanhoh/shohmesos/) is working. DockerFile used is [here](https://github.com/SiewYan/BIGDATA-1/blob/docker_dev/Docker_dev/DockerFiles/Dockerfile_v3).
 
 ### Deployment
 
-    The example code is used to prove the working concept is `Zpeak_nano_multipledataset.py`, deploying the docker container together with spark application done via [script](https://github.com/SiewYan/BIGDATA-1/blob/docker_dev/Docker_dev/deploy_docker.sh). Monitoring webpage for Mesos is `10.64.22.90:5050`.
+   The example code is used to prove the working concept is `Zpeak_nano_multipledataset.py`, deploying the docker container together with spark application done via [script](https://github.com/SiewYan/BIGDATA-1/blob/docker_dev/Docker_dev/deploy_docker.sh). Monitoring webpage for Mesos is `10.64.22.90:5050`.
 
 ### Issue
 
