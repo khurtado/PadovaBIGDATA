@@ -19,8 +19,8 @@
 
 ### Issue
 
-Issues:
-    - [ ] Insufficient resources in executor/slave issue
-    - [ ] Task is not visible in UI webpage while the application is running. (Zpeak_nano_multipledataset.py)
-    - [ ] SecurityManager reports authentication disable, is this expected launching on top of Mesos cluster?
-    - [ ] The deploy mode cluster return error on empty server response. Need MesosDispatcher ? 
+1. Issues:
+   - [ ] Insufficient resources in executor/slave issue
+   - [ ] Task is not visible in UI webpage while the application is running. (Zpeak_nano_multipledataset.py)
+   - [ ] SecurityManager reports authentication disable, is this expected launching on top of Mesos cluster?
+   - [ ] The deploy mode cluster return error on empty server response. Need MesosDispatcher ? 
