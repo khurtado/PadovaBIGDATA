@@ -1,0 +1,58 @@
+FROM centos:centos7
+MAINTAINER Sergio Traldi <sergio.traldi@pd.infn.it>
+
+ARG HADOOP_VERSION=2.7.5
+ARG HADOOP_URL=http://www.eu.apache.org/dist/hadoop/common/hadoop-${HADOOP_VERSION}/hadoop-${HADOOP_VERSION}.tar.gz
+ARG SPARK_VERSION=2.2.1
+ARG STR=2.7
+ARG SPARK_URL=https://archive.apache.org/dist/spark/spark-${SPARK_VERSION}/spark-${SPARK_VERSION}-bin-hadoop${STR}.tgz
+
+RUN yum localinstall -y http://repos.mesosphere.com/el/7/noarch/RPMS/mesosphere-el-repo-7-1.noarch.rpm
+RUN yum update -y && \
+    yum install -y mesos openssh wget python libnss3 curl gzip tar which sudo curl python-devl python-pip git && \
+    yum group install -y "Development Tools"
+
+RUN wget http://shoh.web.cern.ch/shoh/public/CentOS-CERN.repo -O /etc/yum.repos.d/CentOS-CERN.repo && yum clean all && rm -rf /var/cache/yum/*
+
+RUN wget --no-cookies --no-check-certificate --header "Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=accept-securebackup-cookie" "http://download.oracle.com/otn-pub/java/jdk/8u161-b12/2f38c3b165be4555a1fa6e98c45e0808/jdk-8u161-linux-x64.tar.gz" -O /opt/jdk-8u161-linux-x64.tar.gz
+RUN tar -zxf /opt/jdk-8u161-linux-x64.tar.gz -C /opt
+RUN ln -sf /opt/jdk1.8.0_161 /opt/jdk
+RUN rm -rf /opt/jdk-8u161-linux-x64.tar.gz
+RUN echo "net.ipv6.conf.all.disable_ipv6 = 1" >> /etc/sysctl.conf
+RUN echo "net.ipv6.conf.default.disable_ipv6 = 1" >> /etc/sysctl.conf
+RUN chmod 777 /opt/
+
+RUN wget ${HADOOP_URL} -O /opt/hadoop-${HADOOP_VERSION}.tar.gz
+RUN tar -zxf /opt/hadoop-${HADOOP_VERSION}.tar.gz -C /opt
+RUN ln -sf /opt/hadoop-${HADOOP_VERSION} /opt/hadoop
+RUN rm -rf /opt/hadoop-${HADOOP_VERSION}.tar.gz
+
+RUN wget ${SPARK_URL} -O /opt/spark-${SPARK_VERSION}-bin-hadoop${STR}.tgz
+RUN tar -zxf /opt/spark-${SPARK_VERSION}-bin-hadoop${STR}.tgz -C /opt
+RUN ln -sf /opt/spark-${SPARK_VERSION}-bin-hadoop${STR} /opt/spark
+RUN rm -rf /opt/spark-${SPARK_VERSION}-bin-hadoop${STR}.tgz
+
+COPY spark-conf/* /opt/spark/conf/
+COPY scripts /scripts
+
+#Build connector while docker run
+ENV SPARKHOME /opt/spark
+ENV PATH $PATH:/opt/hadoop/bin:/opt/jdk/bin
+ENV JAVA_HOME /opt/jdk
+RUN wget http://shoh.web.cern.ch/shoh/public/CentOS-CERN.repo -O /etc/yum.repos.d/CentOS-CERN.repo && \
+    wget http://shoh.web.cern.ch/shoh/public/RPM-GPG-KEY-cern -O /etc/pki/rpm-gpg/RPM-GPG-KEY-cern && \ 
+    yum update -y && \
+    yum install xrootd-client xrootd-client-libs xrootd-client-devel && \
+    yum clean all && rm -rf /var/cache/yum/*
+
+RUN wget http://shoh.web.cern.ch/shoh/public/hadoop-xrootd-connector.tar.gz -O /hadoop-xrootd-connector.tar.gz
+RUN tar -zxf /hadoop-xrootd-connector.tar.gz -C /
+WORKDIR /hadoop-xrootd-connector
+RUN make clean 2>/dev/null && make all
+RUN mv /hadoop-xrootd-connector/EOSfs.jar /opt/hadoop/share/hadoop/common/lib/EOSfs.jar
+RUN mv /hadoop-xrootd-connector/libjXrdCl.so /opt/hadoop/lib/native/libjXrdCl.so
+RUN make clean 2>/dev/null
+WORKDIR	/
+RUN rm -rf hadoop-xrootd-connector
+
+ENTRYPOINT ["/scripts/run.sh"]
