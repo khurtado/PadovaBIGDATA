@@ -15,10 +15,11 @@
 
 ### Deployment
 
-    The example code is used to prove the working concept is ```Zpeak_nano_multipledataset.py```, deploying the docker container together with spark application done via [script](https://github.com/SiewYan/BIGDATA-1/blob/docker_dev/Docker_dev/deploy_docker.sh). Monitoring webpage for Mesos is ```10.64.22.90:5050```.
+    The example code is used to prove the working concept is `Zpeak_nano_multipledataset.py`, deploying the docker container together with spark application done via [script](https://github.com/SiewYan/BIGDATA-1/blob/docker_dev/Docker_dev/deploy_docker.sh). Monitoring webpage for Mesos is `10.64.22.90:5050`.
 
 ### Issue
 
+Issues:
     - [ ] Insufficient resources in executor/slave issue
     - [ ] Task is not visible in UI webpage while the application is running. (Zpeak_nano_multipledataset.py)
     - [ ] SecurityManager reports authentication disable, is this expected launching on top of Mesos cluster?
