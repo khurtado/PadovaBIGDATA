@@ -1,0 +1,11 @@
+FROM siewyanhoh/shohmesos:v3.3
+MAINTAINER Siewyan Hoh <siew.yan.hoh@cern.ch>
+
+RUN pip install --upgrade pip
+RUN yum remove -y numpy pyparsing python-enum34
+RUN yum install -y graphviz python-devel nano
+RUN pip install numpy google-common protobuf
+RUN pip install tensorflow pydot keras h5py scikit-learn git+https://github.com/maxpumperla/elephas pip git+https://github.com/JoeriHermans/dist-keras.git flask
+#RUN yum install -y python-matplotlib
+RUN yum clean all && rm -rf /var/cache/yum/*
+#COPY scripts/jupy.sh /jupy.sh
