@@ -1,0 +1,22 @@
+FROM siewyanhoh/shohmesos:v4.1
+MAINTAINER Siewyan Hoh <siew.yan.hoh@cern.ch>
+
+RUN rm -rf /opt/spark-2.2.1-bin-hadoop2.7
+RUN rm -rf /opt/spark
+
+RUN wget https://archive.apache.org/dist/spark/spark-2.3.0/spark-2.3.0-bin-hadoop2.7.tgz -O /opt/spark-2.3.0-bin-hadoop2.7.tgz
+RUN tar -zxf /opt/spark-2.3.0-bin-hadoop2.7.tgz -C /opt
+RUN ln -sf /opt/spark-2.3.0-bin-hadoop2.7 /opt/spark
+RUN rm -rf /opt/spark-2.3.0-bin-hadoop2.7.tgz
+
+COPY spark-conf/* /opt/spark/conf/
+COPY scripts /scripts
+
+ENV SPARKHOME /opt/spark
+
+RUN sed -i 's;spark-2.2.1-bin-hadoop2.7;'spark-2.3.0-bin-hadoop2.7';g' /opt/spark/conf/spark-env.sh
+RUN sed -i 's;py4j-0.10.4-src.zip;'py4j-0.10.6-src.zip';g' /opt/spark/conf/spark-env.sh
+
+COPY scripts/jupy.sh /jupy.sh
+
+ENTRYPOINT ["/scripts/run.sh"]

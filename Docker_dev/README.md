@@ -31,7 +31,7 @@
 1. Working example on:
    - [x] Data Analysis Application
    - [x] Machine Learning Application
-   - [ ] Data Streaming	  Application
+   - [ ] Data Streaming	Application
 
 2. Docker deployment on:
    - [x] Data Analysis Application
