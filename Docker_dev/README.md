@@ -38,7 +38,7 @@
    - [ ] Machine Learning Application
    - [ ] Data Streaming Application
 
-3. Metrics observality on:
+3. Metrics observality (deploy at SWAN or using sparkMeasure) on:
    - [ ] Data Analysis Application
    - [ ] Machine Learning Application
    - [ ] Data Streaming	Application
