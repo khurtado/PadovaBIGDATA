@@ -41,8 +41,8 @@
    - [ ] Data Streaming	Application
 
 2. Deploy cluster-mode with Mesos on:
-   - [x] Data Analysis Application
-   - [x] Machine Learning Application
+   - [ ] Data Analysis Application
+   - [ ] Machine Learning Application
    - [ ] Data Streaming Application
 
 3. Docker deployment on:
@@ -59,3 +59,5 @@
    - [ ] Data Analysis Application: Spark-root on data file conflict with spark 2.3.0
    - [ ] Machine Learning Application: Need more input to define the entire study 
    - [ ] Data Streaming Application
+
+6. Jupyterhub (possibly)
