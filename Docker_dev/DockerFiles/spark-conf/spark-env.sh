@@ -26,10 +26,10 @@ export HADOOP_HOME="/opt/hadoop"
 
 export HADOOP_CONF_DIR="$HADOOP_HOME/etc/hadoop"
 export SPARK_YARN_USER_ENV="JAVA_HOME=/opt/jdk"
-export SPARK_LOCAL_IP=$SPARKLOCALIP
+#export SPARK_LOCAL_IP=$SPARKLOCALIP
 
 #SPARK
-export SPARK_HOME=/opt/spark-2.2.1-bin-hadoop2.7
+export SPARK_HOME=/opt/spark-XXX-bin-hadoopXX
 #export SPARK_HOME=/opt/spark-2.3.0-bin-hadoop2.7
 export PYTHONPATH=$SPARK_HOME/python:$SPARK_HOME/python/build:$PYTHONPATH
-export PYTHONPATH=$SPARK_HOME/python/lib/py4j-0.10.4-src.zip:$PYTHONPATH
+export PYTHONPATH=$SPARK_HOME/python/lib/py4j-XXXX-src.zip:$PYTHONPATH

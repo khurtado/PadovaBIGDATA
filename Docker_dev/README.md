@@ -20,15 +20,16 @@
 
 ### Issue
 
-1. Issues:
+1. Issues (tick box means solved):
    - [x] Insufficient resources in executor/slave issue (turn out the master could not listen to slave port)
    - [x] Task is not visible in UI webpage while the application is running. (Zpeak_nano_multipledataset.py)
    - [ ] SecurityManager reports authentication disable, is this expected launching on top of Mesos cluster?
    - [ ] The deploy mode cluster return error on empty server response. Need MesosDispatcher ? 
+   - [x] Insufficient resources in executor/slave in notebook mode.
 
 ### To-do
 
-1. Working example on:
+1. Client mode on:
    - [x] Data Analysis Application
    - [x] Machine Learning Application
    - [ ] Data Streaming	Application
@@ -44,6 +45,6 @@
    - [ ] Data Streaming	Application
 
 4. Deploy cluster-mode with Mesos on:
-   - [x] Data Analysis Application
+   - [ ] Data Analysis Application
    - [ ] Machine Learning Application
    - [ ] Data Streaming Application

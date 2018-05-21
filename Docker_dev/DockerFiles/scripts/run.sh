@@ -20,7 +20,7 @@ export SPARK_PUBLIC_DNS=${SPARK_PUBLIC_DNS:-${CURRENT_IP:-"127.0.0.1"}}
 
 if [ $ADDITIONALVOLUMES ];
 then
-echo "spark.mesos.executor.docker.volumes: $ADDITIONALVOLUMES" >> /opt/spark/conf/spark-defaults.conf
+    echo "spark.mesos.executor.docker.volumes: $ADDITIONALVOLUMES" >> /opt/spark/conf/spark-defaults.conf
 fi
 
 exec "$@"
