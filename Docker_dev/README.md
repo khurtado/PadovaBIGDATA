@@ -14,9 +14,9 @@
 
    The docker image is built based on CentOs with XrootD-Hadoop-Connector compiled on the fly. By default the docker image is capable to accessing EOS storage. Currently docker images [siewyanhoh/shohmesos:v3](https://hub.docker.com/r/siewyanhoh/shohmesos/) is working. DockerFile used is [here](https://github.com/SiewYan/BIGDATA-1/blob/docker_dev/Docker_dev/DockerFiles/Dockerfile_v3).
 
-#### update:
-     
-     recommended images are [siewyanhoh/shohmesos:Spark221](https://github.com/SiewYan/BIGDATA-1/blob/docker_dev/Docker_dev/DockerFiles/Dockerfile_221) and [siewyanhoh/shohmesos:Spark230](https://github.com/SiewYan/BIGDATA-1/blob/docker_dev/Docker_dev/DockerFiles/Dockerfile_230_grid).
+#### Update
+
+   Recommended images are [siewyanhoh/shohmesos:Spark221](https://github.com/SiewYan/BIGDATA-1/blob/docker_dev/Docker_dev/DockerFiles/Dockerfile_221) and [siewyanhoh/shohmesos:Spark230](https://github.com/SiewYan/BIGDATA-1/blob/docker_dev/Docker_dev/DockerFiles/Dockerfile_230_grid).
 
 ### Deployment
 
