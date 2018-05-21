@@ -20,7 +20,9 @@
 
 ### Deployment
 
-   The example code is used to prove the working concept is `Zpeak_nano_multipledataset.py`, deploying the docker container together with spark application done via [script](https://github.com/SiewYan/BIGDATA-1/blob/docker_dev/Docker_dev/deploy_docker.sh). Monitoring webpage for Mesos is `10.64.22.90:5050`.
+   Deploying the docker container together with spark application done via [script](https://github.com/SiewYan/BIGDATA-1/blob/docker_dev/Docker_dev/deploy_docker.sh). Monitoring webpage for Mesos is `10.64.22.90:5050`.
+
+   `sh deploy_docker.sh`
 
 ### Issue
 

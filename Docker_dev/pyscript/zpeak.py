@@ -263,11 +263,11 @@ if __name__ == "__main__":
     #taskMetrics.end()
     #taskMetrics.printReport()
 
-    TM.show()
-    TM=TM.collect()
-    taskMetrics.saveData(TM, "taskmetrics_test1", "json")
-    os.system('hdfs dfs -put /taskmetrics_test1 hdfs://10.64.22.72:9000/taskmetrics_test1')
-    print ' ++Run "hdfs dfs -copyToLocal hdfs://10.64.22.72:9000/<PATH-TO-FILE> ." to retrieve your file from hdfs ++'
+    #TM.show()
+    #TM=TM.collect()
+    #taskMetrics.saveData(TM, "taskmetrics_test1", "json")
+    #os.system('hdfs dfs -put /taskmetrics_test1 hdfs://10.64.22.72:9000/taskmetrics_test1')
+    #print ' ++Run "hdfs dfs -copyToLocal hdfs://10.64.22.72:9000/<PATH-TO-FILE> ." to retrieve your file from hdfs ++'
     os.system('ls .')
     #os.system('ls /taskmetrics_test1')
     #os.system('cat /taskmetrics_test1/_SUCCESS')
