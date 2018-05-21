@@ -29,22 +29,27 @@
 
 ### To-do
 
-1. Client mode on:
+1. Deploy client-mode with Mesos on:
    - [x] Data Analysis Application
    - [x] Machine Learning Application
    - [ ] Data Streaming	Application
 
-2. Docker deployment on:
+2. Deploy cluster-mode with Mesos on:
    - [x] Data Analysis Application
-   - [ ] Machine Learning Application
+   - [x] Machine Learning Application
    - [ ] Data Streaming Application
 
-3. Metrics observality (deploy at SWAN or using sparkMeasure) on:
+3. Docker deployment on:
+   - [x] Data Analysis Application
+   - [x] Machine Learning Application
+   - [ ] Data Streaming Application
+
+4. Metrics observality (deploy at SWAN or using sparkMeasure) on:
    - [ ] Data Analysis Application
    - [ ] Machine Learning Application
    - [ ] Data Streaming	Application
 
-4. Deploy cluster-mode with Mesos on:
-   - [ ] Data Analysis Application
-   - [ ] Machine Learning Application
+5. Define and review the demo code on:
+   - [ ] Data Analysis Application: Spark-root on data file conflict with spark 2.3.0
+   - [ ] Machine Learning Application: Need more input to define the entire study 
    - [ ] Data Streaming Application
