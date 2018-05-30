@@ -59,7 +59,8 @@ RUN yum remove -y numpy pyparsing python-enum34
 RUN yum install -y graphviz python-devel nano
 RUN pip install numpy google-common protobuf
 RUN pip install tensorflow pydot keras h5py scikit-learn git+https://github.com/maxpumperla/elephas pip git+https://github.com/JoeriHermans/dist-keras.git flask
-#RUN yum install -y python-matplotlib
+
+RUN yum install -y python-matplotlib
 
 # Copy scripts
 COPY spark-conf/* /opt/spark/conf/

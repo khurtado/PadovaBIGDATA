@@ -118,19 +118,19 @@ if __name__ == "__main__":
     
     spark=SparkSession.builder.appName('ZpeakSpark').getOrCreate()
     sc=spark
-    sc0=spark.sparkContext
+    #sc0=spark.sparkContext
 
     #Metric start
     ##Collect StageMetrics
-    stageMetrics = sc0._jvm.ch.cern.sparkmeasure.StageMetrics(spark._jsparkSession)
-    stageMetrics.begin()
+    #stageMetrics = sc0._jvm.ch.cern.sparkmeasure.StageMetrics(spark._jsparkSession)
+    #stageMetrics.begin()
 
     ##Collect TaskMetrics
-    taskMetrics = sc0._jvm.ch.cern.sparkmeasure.TaskMetrics(spark._jsparkSession, False)
+    #taskMetrics = sc0._jvm.ch.cern.sparkmeasure.TaskMetrics(spark._jsparkSession, False)
     ###Verbal report
     #taskMetrics.begin()
     ###Save for later analysis
-    TM = taskMetrics.createTaskMetricsDF("PerfTaskMetrics")
+    #TM = taskMetrics.createTaskMetricsDF("PerfTaskMetrics")
 
     DFList=[]
     for s in samples:
@@ -246,10 +246,10 @@ if __name__ == "__main__":
     os.system('hdfs dfs -put /LeadPtW.pdf hdfs://10.64.22.72:9000/LeadPtW.pdf')
     os.system('hdfs dfs -put /LeadPt.pdf hdfs://10.64.22.72:9000/LeadPt.pdf')
 
-    stageMetrics.end()
-    print '++++++++++++++++++++++++++++++++++++++++++++++++++++++'
-    print 'PRINT STAGE METRICS: REPORT'
-    print '++++++++++++++++++++++++++++++++++++++++++++++++++++++'
+    #stageMetrics.end()
+    #print '++++++++++++++++++++++++++++++++++++++++++++++++++++++'
+    #print 'PRINT STAGE METRICS: REPORT'
+    #print '++++++++++++++++++++++++++++++++++++++++++++++++++++++'
     #stageMetrics.printReport()
     #print '++++++++++++++++++++++++++++++++++++++++++++++++++++++'
     #print 'PRINT STAGE METRICS: ACCUMULABLES'
