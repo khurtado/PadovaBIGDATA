@@ -200,7 +200,7 @@ if __name__ == "__main__":
     print hg
     plots=hg.UntypedLabel(
         # 1d histograms                                                                                                                                                               
-        LeadPtW      = hg.Bin(50, 30, 180,   DF['Dimuon.mu1_pt'], hg.Sum(DF['pseudoweight'])),
+        LeadPtW      = hg.Bin(50, 30, 180,   DF['Dimuon.mu1_pt']),
         LeadPt       = hg.Bin(50, 30, 180,   DF['Dimuon.mu1_pt']),
         LeadPtEta    = hg.Bin(48, -2.4, 2.4, DF['Dimuon.mu1_eta']),
         SubLeadPt    = hg.Bin(100, 0, 200,   DF['Dimuon.mu2_pt']),
@@ -214,26 +214,18 @@ if __name__ == "__main__":
 
     fig = plt.figure(num=None, figsize=(8, 6), dpi=80, facecolor='w', edgecolor='k')
 
-    for VARIABLE in ['LeadPtW','LeadPt']:
+    for VARIABLE in ['LeadPtW','LeadPt','InvMass']:
         aHisto   = bulkHisto("SingleMuon")('%s' %VARIABLE)
         nBins    = len(aHisto.values)
         edges    = np.linspace(aHisto.low, aHisto.high, nBins + 1)
         width    = (aHisto.high - aHisto.low) / nBins
         plotVals = {}
-        for k in bulkHisto.bins:
-            if k == 'SingleMuon':
-                continue
-            if VARIABLE=='LeadPtW':
-                plotVals[k] = [x.sum*0.19 for x in bulkHisto(k)('%s' %VARIABLE).values]
-            else:
-                plotVals[k] = [x.toJson()['data']*0.19 for x in bulkHisto(k)('%s' %VARIABLE).values]
-            plt.bar(edges[:-1], plotVals[k], width=width, label=k, color=samples[k]['color'], edgecolor=samples[k]['color'], fill=True)
+        for k in ['DYJetsToLL','ZZ','TT','WW','WZ']:
+            plotVals[k] = [x.toJson()['data']*0.19 for x in bulkHisto(k)('%s' %VARIABLE).values]
+            plt.bar(edges[:-1], plotVals[k], width=width, label=k, color=samples[k]['color'], edgecolor=samples[k]['color'], fill=True, log=True)
 
         xdata   = np.linspace(aHisto.low+0.5*width, aHisto.high+0.5*width, nBins)
-        if VARIABLE=='LeadPtW':
-            ydata   = [x.sum for x in bulkHisto('SingleMuon')('%s' %VARIABLE).values]
-        else:
-            ydata   = [x.toJson()['data'] for x in bulkHisto('SingleMuon')('%s' %VARIABLE).values]
+        ydata   = [x.toJson()['data'] for x in bulkHisto('SingleMuon')('%s' %VARIABLE).values]
         yerror  = [x**0.5 for x in ydata]
 
         plt.errorbar(xdata, ydata, fmt='ko', label="Data", xerr=width/2, yerr=yerror, ecolor='black')
@@ -241,10 +233,10 @@ if __name__ == "__main__":
         plt.xlabel('Dimuon invariant mass m($\mu\mu$) (GeV)')
         plt.ylabel('Events / 0.5 GeV')
         plt.legend(loc='upper right', fontsize='x-large', )
-        plt.savefig('/'+VARIABLE+'.pdf')    
+        plt.savefig(VARIABLE+'.pdf')    
+        os.system('hdfs dfs -put '+VARIABLE+'.pdf hdfs://10.64.22.72:9000/LeadPtW.pdf')
 
-    os.system('hdfs dfs -put /LeadPtW.pdf hdfs://10.64.22.72:9000/LeadPtW.pdf')
-    os.system('hdfs dfs -put /LeadPt.pdf hdfs://10.64.22.72:9000/LeadPt.pdf')
+    print "plot save to hdfs://10.64.22.72:9000/"
 
     #stageMetrics.end()
     #print '++++++++++++++++++++++++++++++++++++++++++++++++++++++'
@@ -269,6 +261,7 @@ if __name__ == "__main__":
     #os.system('hdfs dfs -put /taskmetrics_test1 hdfs://10.64.22.72:9000/taskmetrics_test1')
     #print ' ++Run "hdfs dfs -copyToLocal hdfs://10.64.22.72:9000/<PATH-TO-FILE> ." to retrieve your file from hdfs ++'
     os.system('ls .')
+    os.system('hdfs dfs -ls hdfs://10.64.22.72:9000/')
     #os.system('ls /taskmetrics_test1')
     #os.system('cat /taskmetrics_test1/_SUCCESS')
     sc.stop()
