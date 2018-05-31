@@ -53,4 +53,13 @@ samples = {
         'weight'   : 1.,   
         'color'    : 'red',   
     },   
+    'ZH' : {
+        'filename' : 'ZH_HToBB_ZToLL_M125_13TeV_amcatnloFXFX_madspin_pythia8-v1.root',
+        #https://cms-gen-dev.cern.ch/xsdb/?searchQuery=DAS=ZH_HToBB_ZToLL_M125_13TeV_amcatnloFXFX_madspin_pythia8
+        'xsec'     : 0.07814,
+         'eff'     : 1.,   
+        'kfactor'  : 1.,   
+        'weight'   : 1.,   
+        'color'    : 'cyan',
+    },
 }
