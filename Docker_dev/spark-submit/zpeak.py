@@ -214,7 +214,7 @@ if __name__ == "__main__":
 
     fig = plt.figure(num=None, figsize=(8, 6), dpi=80, facecolor='w', edgecolor='k')
 
-    for VARIABLE in ['LeadPtW','LeadPt','InvMass']:
+    for VARIABLE in ['InvMass']: #'LeadPtW','LeadPt'
         aHisto   = bulkHisto("SingleMuon")('%s' %VARIABLE)
         nBins    = len(aHisto.values)
         edges    = np.linspace(aHisto.low, aHisto.high, nBins + 1)
