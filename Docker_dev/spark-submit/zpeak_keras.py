@@ -1,17 +1,34 @@
 import os
-from pyspark.sql.functions import lit
+from pyspark.sql.functions import lit, array, col, udf, rand
 from samples import *
 from math import *
 from pyspark.sql.types import *
 from pyspark.sql import SparkSession
-from pyspark.sql.functions import udf
-#from pyspark.sql.functions import *
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt                                                                                                                                        
 import histogrammar.sparksql
 import histogrammar as hg
 import numpy as np
+
+from pyspark.ml.linalg import Vectors, VectorUDT
+from pyspark.ml.feature import StringIndexer
+from pyspark.ml.feature import StandardScaler
+
+from pyspark.ml.feature import VectorAssembler
+from pyspark.ml.evaluation import MulticlassClassificationEvaluator
+
+from distkeras.transformers import LabelIndexTransformer
+from distkeras.predictors import ModelPredictor
+from distkeras.evaluators import *
+
+from distkeras.trainers import SingleTrainer
+from distkeras.trainers import AEASGD
+from distkeras.trainers import DOWNPOUR
+
+from keras.models import Sequential
+from keras.layers.core import Dense, Dropout, Activation
+
 
 #Method
 def binaryWeight(pt):
@@ -265,25 +282,22 @@ if __name__ == "__main__":
     #os.system('ls /taskmetrics_test1')
     #os.system('cat /taskmetrics_test1/_SUCCESS')
     
-    from pyspark.sql.functions import udf
-    from pyspark.sql.functions import rand
-    from pyspark.ml.linalg import Vectors, VectorUDT
-    #from pyspark.mllib.linalg import Vectors, VectorUDT
-    
     vectorizer = udf(lambda x: Vectors.dense(x), VectorUDT())
 
     ##Construct Desire Features:
-    nFeatures = vectorizer(
-        array(
-            'Dimuon.mass',
-            'Dimuon.dPhi',
-            'Dimuon.dR'
-            #'Dijet.mass',
-            #'Dijet.dPhi',
-            #'Dijet.dR',
-            #'DeltaRZjj'
-        )
-    )
+    #nFeatures = vectorizer(
+    #    array(
+    #        'Dimuon.mass',
+    #        'Dimuon.dPhi',
+    #        'Dimuon.dR'
+    #        'Dijet.mass',
+    #        'Dijet.dPhi',
+    #        'Dijet.dR',
+    #        'DeltaRZjj'
+    #    )
+    #)
+
+    nFeatures = vectorizer( array('Dimuon.mass','Dimuon.dPhi','Dimuon.dR') ) 
 
     pseudodata = DF.withColumn( "features" , nFeatures ).select("features","sample")
 
@@ -292,13 +306,9 @@ if __name__ == "__main__":
     #Rename sample to Label
     dataset = pseudodata.selectExpr("features as features", "sample as label").orderBy(rand())
 
-    from pyspark.ml.feature import StringIndexer
-
     string_indexer = StringIndexer(inputCol="label", outputCol="index_label")
     fitted_indexer = string_indexer.fit(dataset)
     indexed_df = fitted_indexer.transform(dataset)
-
-    from pyspark.ml.feature import StandardScaler
     
     scaler = StandardScaler(inputCol="features", outputCol="scaled_features", withStd=True, withMean=True)
     fitted_scaler = scaler.fit(indexed_df)
@@ -331,8 +341,7 @@ if __name__ == "__main__":
     print("Number of trainingset instances: " + str(num_training_set))
     print("Total number of instances: " + str(num_test_set + num_training_set))
 
-    from keras.models import Sequential
-    from keras.layers.core import Dense, Dropout, Activation
+
     model = Sequential()
     model.add(Dense(100, input_shape=(nb_features,)))
     model.add(Activation('relu'))
@@ -348,19 +357,6 @@ if __name__ == "__main__":
 
     optimizer = 'adagrad'
     loss = 'categorical_crossentropy'
-
-    from pyspark.ml.feature import StandardScaler
-    from pyspark.ml.feature import VectorAssembler
-    from pyspark.ml.feature import StringIndexer
-    from pyspark.ml.evaluation import MulticlassClassificationEvaluator
-    
-    from distkeras.transformers import LabelIndexTransformer
-    from distkeras.predictors import ModelPredictor
-    from distkeras.evaluators import *
-
-    from distkeras.trainers import SingleTrainer
-    from distkeras.trainers import AEASGD
-    from distkeras.trainers import DOWNPOUR
 
     def evaluate(model):
         global test_set
@@ -395,25 +391,25 @@ if __name__ == "__main__":
     time_spent = {}
 
     #singleTrainer
-    trainer = SingleTrainer(keras_model=model, loss=loss, worker_optimizer=optimizer, 
-                        features_col="scaled_features", num_epoch=1, batch_size=64)
-    trained_model = trainer.train(training_set)
+    #trainer = SingleTrainer(keras_model=model, loss=loss, worker_optimizer=optimizer, 
+    #                    features_col="scaled_features", num_epoch=1, batch_size=64)
+    #trained_model = trainer.train(training_set)
 
-    # Fetch the training time.
-    dt = trainer.get_training_time()
-    print("Time spent (SingleTrainer): " + `dt` + " seconds.")
+    ## Fetch the training time.
+    #dt = trainer.get_training_time()
+    #print("Time spent (SingleTrainer): " + `dt` + " seconds.")
 
-    # Evaluate the model.
-    score = evaluate(trained_model)
-    print("F1 (SingleTrainer): " + `score`)
+    ## Evaluate the model.
+    #score = evaluate(trained_model)
+    #print("F1 (SingleTrainer): " + `score`)
 
-    # Evaluate Accuracy
-    accuracy = evaluate_accuracy(trained_model,test_set)
-    print("Accuracy: " + `accuracy`)
+    ## Evaluate Accuracy
+    #accuracy = evaluate_accuracy(trained_model,test_set)
+    #print("Accuracy: " + `accuracy`)
 
-    # Store the training metrics.
-    results['single'] = score
-    time_spent['single'] = dt
+    ## Store the training metrics.
+    #results['single'] = score
+    #time_spent['single'] = dt
 
     #Model Training and evaluation: Asynchronous EASGD
     trainer = AEASGD(keras_model=model, worker_optimizer=optimizer, loss=loss, num_workers=5, batch_size=64,
@@ -421,10 +417,10 @@ if __name__ == "__main__":
                  rho=5.0, learning_rate=0.1)
     trainer.set_parallelism_factor(1)
 
-    try:
-        trained_model = trainer.train(training_set)
-    except KeyboardInterrupt as e:
-        trainer.parameter_server.stop()
+    #try:
+    trained_model = trainer.train(training_set)
+    #except KeyboardInterrupt as e:
+    #   trainer.parameter_server.stop()
 
     # Fetch the training time.
     dt = trainer.get_training_time()
