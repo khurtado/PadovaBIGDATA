@@ -12,4 +12,5 @@ spark-submit \
     --conf "spark.history.ui.acls.enable=false" \
     --conf "spark.eventLog.enabled=true" \
     --conf "spark.eventLog.dir=hdfs://10.64.22.72:9000/eventLogging" \
-    zpeak.py
+    zpeak_keras.py
+    #zpeak_keras.py
