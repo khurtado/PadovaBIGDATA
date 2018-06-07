@@ -9,8 +9,8 @@ submit=1
 if [ "${submit}" == 1 ];then
     #spark-submit in CLIENT MODE
     docker run -it --rm \
-	-v ${WORKDIR}/spark-submit/zpeak.py:/root/zpeak.py \
-	-v ${WORKDIR}/spark-submit/samples.py:/root/samples.py \
+	-v ${WORKDIR}/../spark-submit/zpeak.py:/root/zpeak.py \
+	-v ${WORKDIR}/../spark-submit/samples.py:/root/samples.py \
 	-e SPARK_MASTER=${MASTER} \
 	-e SPARK_IMAGE=siewyanhoh/shohmesos:v3.3 \
 	--net=host --pid host \
@@ -28,10 +28,10 @@ if [ "${submit}" == 1 ];then
 else
     #Running jupyter notebook in CLIENT MODE
     docker run -it --rm \
-	-v notebooks/Zpeak_nano_multipledataset.ipynb:/Zpeak_nano_multipledataset.ipynb \
-	-v notebooks/DemonMl_Dist-Keras.ipynb:/DemonMl_Dist-Keras.ipynb \
-	-v notebooks/samples.py:/samples.py \
-	-v notebooks/Cache-test.ipynb:/Cache-test.ipynb \
+	-v ${WORKDIR}/../notebooks/Zpeak_nano_multipledataset.ipynb:/Zpeak_nano_multipledataset.ipynb \
+	-v ${WORKDIR}/../notebooks/DemonMl_Dist-Keras.ipynb:/DemonMl_Dist-Keras.ipynb \
+	-v ${WORKDIR}/../notebooks/samples.py:/samples.py \
+	-v ${WORKDIR}/../notebooks/Cache-test.ipynb:/Cache-test.ipynb \
 	-e SPARK_MASTER=${MASTER} \
 	-e SPARK_IMAGE=siewyanhoh/shohmesos:Spark221 \
 	-e SPARK_LOCAL_IP=10.64.22.90 \
