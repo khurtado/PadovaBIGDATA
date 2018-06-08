@@ -16,13 +16,31 @@
 
 #### Update
 
-   Recommended images are [siewyanhoh/shohmesos:Spark221](https://github.com/SiewYan/BIGDATA-1/blob/docker_dev/Docker_dev/DockerFiles/Dockerfile_221) and [siewyanhoh/shohmesos:Spark230](https://github.com/SiewYan/BIGDATA-1/blob/docker_dev/Docker_dev/DockerFiles/Dockerfile_230_grid).
+   ~~Recommended images are [siewyanhoh/shohmesos:Spark221](https://github.com/SiewYan/BIGDATA-1/blob/docker_dev/Docker_dev/DockerFiles/Dockerfile_221) and [siewyanhoh/shohmesos:Spark230](https://github.com/SiewYan/BIGDATA-1/blob/docker_dev/Docker_dev/DockerFiles/Dockerfile_230_grid).~~
 
 ### Deployment
 
-   Deploying the docker container together with spark application done via [script](https://github.com/SiewYan/BIGDATA-1/blob/docker_dev/Docker_dev/deploy_docker.sh). Monitoring webpage for Mesos is `10.64.22.90:5050`.
+   Deploying application in Spark standalone and Mesos (via docker)
 
-   `sh deploy_docker.sh`
+#### Deploy in Spark standalone cluster `10.64.22.198:7077`
+
+   Application can be submitted via `spark-submit` and `jupyter notebook`
+   
+   ```
+   cd scripts
+   #check the boolean $submit to switch between two submission
+   sh deploy_SPARK.sh
+   ```
+
+#### Deploy in Mesos cluster `10.64.22.90:5050`
+
+   Application can be submitted	via `spark-submit` and `jupyter notebook`
+
+   ```
+   cd scripts
+   #check the boolean $submit to switch	between	two submission
+   sh deploy_MESOS.sh
+   ```
 
 ### Issue
 
