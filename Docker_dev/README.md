@@ -18,26 +18,46 @@
 
    ~~Recommended images are [siewyanhoh/shohmesos:Spark221](https://github.com/SiewYan/BIGDATA-1/blob/docker_dev/Docker_dev/DockerFiles/Dockerfile_221) and [siewyanhoh/shohmesos:Spark230](https://github.com/SiewYan/BIGDATA-1/blob/docker_dev/Docker_dev/DockerFiles/Dockerfile_230_grid).~~
 
-### Deployment
+## Deployment
 
    Deploying application in Spark standalone and Mesos (via docker)
 
 #### Deploy in Spark standalone cluster `10.64.22.198:7077`
 
+   Setup ssh double tunneling
+   ```
+   ssh -t -L 11198:localhost:11198 USER@gate.pd.infn.it ssh -L 11198:localhost:11198 USER@10.64.22.198
+   ```
+
+   Clone the package
+   ```
+   git clone -b docker_dev https://github.com/SiewYan/BIGDATA-1.git
+   ```
+
    Application can be submitted via `spark-submit` and `jupyter notebook`
    
    ```
-   cd scripts
+   cd BIGDATA-1/Docker_dev/scripts
    #check the boolean $submit to switch between two submission
    sh deploy_SPARK.sh
    ```
 
 #### Deploy in Mesos cluster `10.64.22.90:5050`
 
+   Setup ssh double tunneling
+   ```
+   ssh -t -L 1190:localhost:1190 USER@gate.pd.infn.it ssh -L 1190:localhost:1190 USER@10.64.22.90
+   ```
+
+   Clone the package
+   ```
+   git clone -b	docker_dev https://github.com/SiewYan/BIGDATA-1.git
+   ```
+
    Application can be submitted	via `spark-submit` and `jupyter notebook`
 
    ```
-   cd scripts
+   cd BIGDATA-1/Docker_dev/scripts
    #check the boolean $submit to switch	between	two submission
    sh deploy_MESOS.sh
    ```
