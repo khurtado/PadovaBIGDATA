@@ -20,6 +20,7 @@ if [ "${submit}" == 1 ];then
 	--conf "spark.jars.packages=org.diana-hep:spark-root_2.11:0.1.16,org.diana-hep:histogrammar-sparksql_2.11:1.0.4,ch.cern.sparkmeasure:spark-measure_2.11:0.11" \
 	--conf "spark.driver.extraClassPath=/opt/hadoop/share/hadoop/common/lib/EOSfs.jar" \
 	--conf "spark.executor.extraClassPath=/opt/hadoop/share/hadoop/common/lib/EOSfs.jar" \
+	--conf "spark.driver.memory=2g" \
 	--conf "spark.num.executors=8" \
 	--conf "spark.executor.cores=2" \
 	--conf "spark.executor.instances=4" \
