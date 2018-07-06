@@ -6,8 +6,7 @@ BASE       = 'NANO_Prod/'
 ####
 samples = {    
     'SingleMuon' : {
-        #root://xrootd-cms.infn.it///store/data/Run2016B/SingleMuon/NANOAOD/05Feb2018_ver1-v1/40000/0212E48A-540C-E811-85D1-0CC47AF9B1AE.root
-        'filename' : 'SingleMuon-Run2016C-05Feb2018-v1_Skim.root',   
+        'filename' : 'SingleMuonRun2016C-03Feb2017-v1.root',   
         'xsec'     : None,   
         'eff'      : 1.,   
         'kfactor'  : 1.,   
