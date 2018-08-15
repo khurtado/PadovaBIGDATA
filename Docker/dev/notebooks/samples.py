@@ -11,7 +11,7 @@ samples = {
         'xsec'     : None,   
         'eff'      : 1.,   
         'kfactor'  : 1.,   
-        'weight'   : 1.,   
+        'weight'   : 1.00,   
         'color'    : 'black',   
     },
     'DYJetsToLL' : {
@@ -19,7 +19,7 @@ samples = {
         'xsec'     : 3.*1921.8,   
         'eff'      : 1.,   
         'kfactor'  : 1.,   
-        'weight'   : 1.,   
+        'weight'   : 1.00,   
         'color'    : 'green',   
     },
     'TT' : {
@@ -27,7 +27,7 @@ samples = {
         'xsec'     : 831.76,   
         'eff'      : 1.,   
         'kfactor'  : 1.,   
-        'weight'   : 1.,   
+        'weight'   : 1.00,   
         'color'    : 'gold',   
     },
     'WW' : {
@@ -35,7 +35,7 @@ samples = {
         'xsec'     : 118.7,   
         'eff'      : 1.,   
         'kfactor'  : 1.,   
-        'weight'   : 1.,   
+        'weight'   : 1.00,   
         'color'    : 'blue',   
     },
     'WZ' : {
@@ -43,7 +43,7 @@ samples = {
         'xsec'     : 47.2,   
         'eff'      : 1.,   
         'kfactor'  : 1.,   
-        'weight'   : 1.,   
+        'weight'   : 1.00,   
         'color'    : 'cyan',   
     },
     'ZZ' : {
@@ -51,7 +51,7 @@ samples = {
         'xsec'     : 16.6,   
         'eff'      : 1.,   
         'kfactor'  : 1.,   
-        'weight'   : 1.,   
+        'weight'   : 0.8,   
         'color'    : 'red',   
     },   
     'ZH' : {
@@ -60,7 +60,7 @@ samples = {
         'xsec'     : 0.07814,
          'eff'     : 1.,   
         'kfactor'  : 1.,   
-        'weight'   : 1.,   
+        'weight'   : 1.00,   
         'color'    : 'cyan',
     },
 }
