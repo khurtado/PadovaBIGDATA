@@ -1,0 +1,5 @@
+# To run:
+vc3-spark-submit --executor-memory 7G --conf spark.sql.caseSensitive=true --conf spark.serializer=org.apache.spark.serializer.KryoSerializer --packages org.diana-hep:spark-root_2.11:0.1.16,org.diana-hep:histogrammar-sparksql_2.11:1.0.4 Zpeak_Nanoaod-SPARK.py
+
+# To check progress
+http://headnode:8080 
